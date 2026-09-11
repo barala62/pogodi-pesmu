@@ -1,0 +1,6 @@
+{
+  "name": "Pogodi Pesmu",
+  "description": "Muzička igra pogađanja balkanskih hitova na osnovu kratkih zvučnih isečaka.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
