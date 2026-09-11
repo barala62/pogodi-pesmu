@@ -1,7 +1,7 @@
 import { Song, GameCategory, CategoryInfo } from '../../types';
 import { MODERNO_SONGS } from './modernoSongs';
 import { NARODNA_SONGS } from './narodnaSongs';
-import { EXYU_SONGS } from './exyuSongs';
+import { EXPANDED_EXYU_SONGS as EXYU_SONGS } from './exyuSongs';
 import { POP_DANCE_SONGS } from './popDanceSongs';
 
 export const ALL_BALKAN_SONGS: Song[] = [
