@@ -3,10 +3,6 @@ import { MODERNO_SONGS } from './modernoSongs';
 import { NARODNA_SONGS } from './narodnaSongs';
 import { EXYU_SONGS } from './exyuSongs';
 import { POP_DANCE_SONGS } from './popDanceSongs';
-import { EXPANDED_NARODNA_SONGS } from './expandedNarodna';
-import { EXPANDED_EXYU_SONGS } from './expandedExYu';
-import { EXPANDED_MODERNO_SONGS } from './expandedModerno';
-import { EXPANDED_POPDANCE_SONGS } from './expandedPopDance';
 
 // Helper to normalize Latin diacritics for flexible fuzzy searching and deduplication
 export function normalizeText(text: string): string {
@@ -22,20 +18,19 @@ export function normalizeText(text: string): string {
 
 const RAW_BALKAN_SONGS: Song[] = [
   ...MODERNO_SONGS,
-  ...EXPANDED_MODERNO_SONGS,
   ...NARODNA_SONGS,
-  ...EXPANDED_NARODNA_SONGS,
   ...EXYU_SONGS,
-  ...EXPANDED_EXYU_SONGS,
-  ...POP_DANCE_SONGS,
-  ...EXPANDED_POPDANCE_SONGS
+  ...POP_DANCE_SONGS
 ];
 
-// Deduplicate songs by artist + title so every song in the database is unique
+// Deduplicate songs by id and artist + title so every song in the database is unique
+const seenIds = new Set<string>();
 const seenKeys = new Set<string>();
 export const ALL_BALKAN_SONGS: Song[] = RAW_BALKAN_SONGS.filter(song => {
+  if (seenIds.has(song.id)) return false;
   const key = `${normalizeText(song.artist)}:::${normalizeText(song.title)}`;
   if (seenKeys.has(key)) return false;
+  seenIds.add(song.id);
   seenKeys.add(key);
   return true;
 });
